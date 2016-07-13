@@ -9,4 +9,4 @@ This code repository contains "AutoEncoder, Denoising AutoEncoder, Contractive A
 - test.py includes small examples for three autoencoder types run on MNIST dataset.
 - You should previously install required packages such as "numpy" from the web.
 
-In case of any failure/recommendation, please don't hesitate to connect with the author (Savas Ozkan / s.ozkan@yahoo.com).
+In case of any failure/recommendation, please don't hesitate to connect with the author (Savas Ozkan / savasozkan.com).
