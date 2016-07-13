@@ -1,8 +1,8 @@
 # py_autoencoders
 
-This code repository contains "AutoEncoder(AE), Denoising AutoEncoder(DAE), Contractive AutoEncoder (CAE), Contractive Higher-Order AutoEncoder (CAE+H)" written on python. The codes extensively use the lecture notes and base code infrastructures in CS231 Stanford (http://cs231n.stanford.edu/) and CENG 783 METU (http://www.kovan.ceng.metu.edu.tr/~sinan/DL/).
+This code repository contains "AutoEncoder(AE), Denoising AutoEncoder(DAE), Contractive AutoEncoder (CAE), Contractive Higher-Order(2nd order) AutoEncoder (CAE+H)" written on python. The codes extensively use the lecture notes and base code infrastructures in CS231 Stanford (http://cs231n.stanford.edu/) and CENG 783 METU (http://www.kovan.ceng.metu.edu.tr/~sinan/DL/).
 
-----Some features that you can find in the codes----
+----Some of the features that you can find in the codes----
 - "Euclidean" and "Cross Entropy" loss options are selectable in code. 
 - Use of bias in computations is selectable.
 - Shared weights are used in the course of mapping input to hidden layer and hidden to output layer.
