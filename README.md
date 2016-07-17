@@ -10,3 +10,8 @@ This code repository contains "AutoEncoder(AE), Denoising AutoEncoder(DAE), Cont
 - You should previously install required packages such as "numpy" from the web.
 
 In case of any failure/recommendation, please don't hesitate to connect with the author (Savas Ozkan / savasozkan.com).
+
+![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/ae_filter.png)
+![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/dae_filter.png)
+![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/cae_filter.png)
+![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/cae_h_filter.png)
