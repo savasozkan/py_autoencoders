@@ -12,7 +12,7 @@ This code repository contains "AutoEncoder(AE), Denoising AutoEncoder(DAE), Cont
 In case of any failure/recommendation, please don't hesitate to connect with the author (Savas Ozkan / savasozkan.com).
 
 AutoEncoder (loss =179.18)
-![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/ae_filter.png?raw=true "Title")
+![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/ae_filter.png?raw=true "Optional Title")
 
 Denosing AutoEncoder (loss =178.81)
 ![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/dae_filter.png)
