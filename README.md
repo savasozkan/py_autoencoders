@@ -11,14 +11,18 @@ This code repository contains "AutoEncoder(AE), Denoising AutoEncoder(DAE), Cont
 
 In case of any failure/recommendation, please don't hesitate to connect with the author (Savas Ozkan / savasozkan.com).
 
-AutoEncoder (loss=~179)
-![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/ae_filter.png)
+AutoEncoder (euclidean loss=6.6937)
+![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/ae.png)
+![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/ae_re.png)
 
-Denosing AutoEncoder (loss=~178.81)
-![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/dae_filter.png)
+Denosing AutoEncoder (euclidean loss=6.8654)
+![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/dae.png)
+![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/dae_re.png)
 
-Contractive AutoEncoder (loss=~135)
-![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/cae_filter.png)
+Contractive AutoEncoder (euclidean loss=6.0982)
+![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/cae.png)
+![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/cae_re.png)
 
-Contractive Higher-Order AutoEncoder (loss=~130.00)
-![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/cae_h_filter.png)
+Contractive Higher-Order AutoEncoder (euclidean loss=6.0628)
+![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/caeh.png)
+![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/caeh_re.png)
