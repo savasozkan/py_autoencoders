@@ -8,7 +8,7 @@ class denoising_autoencoder(base_autoencoder):
         base_autoencoder.__init__(self, layer_units, weights, bias, act_func, loss_type)
         self.init_weights(seed)
     
-    def loss_with_noise(self, X, X_noisy, reg=0.001): 
+    def loss_with_noise(self, X, X_noisy, reg=0.001, opt='train'): 
         weights = self.weights
         bias = self.bias
         
@@ -24,6 +24,9 @@ class denoising_autoencoder(base_autoencoder):
         X_pred  = self.ac_func(pre, self.act_func)
         
         loss = self.loss_func(X, X_pred)
+        if opt == 'test':
+            return loss
+            
         loss += reg*np.sum(W*W) # Regularization Term
         
         err_pred     = self.loss_func_deriv(X, X_pred)

@@ -66,13 +66,13 @@ def __autoencoder_mnist__():
     nhidden = 100 
 
     net = autoencoder(layer_units=(ninput, nhidden, ninput), bias=False, act_func = 'sigmoid', 
-                      loss_type='cross_entropy', seed=12)
+                      loss_type='euclidean', seed=12)
     tic = time.time()
-    stats = net.train_with_SGD(X_train, learning_rate=0.1, learning_rate_decay=0.95, reg=0.01, 
-                               num_iters=2500, batchsize=128, mu=0.9)
+    stats = net.train_with_SGD(X_train, learning_rate=0.1, learning_rate_decay=0.95, reg=0.001, 
+                               num_iters=2000, batchsize=128, mu=0.9)
     toc = time.time()
     print toc-tic, 'sec elapsed'
-    print 'overall loss: ', net.loss(X_train, reg=0.01)[0]
+    print 'overall loss: ', net.loss(X_train, reg=0.01, opt='test')
     plot_net_output(net, stats, X_train)
     
     
@@ -92,13 +92,13 @@ def __denoising_autoencoder_mnist__():
     nhidden = 100
 
     net = denoising_autoencoder(layer_units=(ninput, nhidden, ninput), bias=True,
-                                act_func = 'sigmoid', loss_type='cross_entropy', seed=12)
+                                act_func = 'sigmoid', loss_type='euclidean', seed=12)
     tic = time.time()
     stats = net.train_with_SGD_with_noise(X_train, noise=gaussiannoise(rate=0.3, sd=0.3), learning_rate=0.1, 
-                                          learning_rate_decay=0.95, reg=0.01, num_iters=2500, batchsize=128, mu=0.9)
+                                          learning_rate_decay=0.95, reg=0.001, num_iters=2000, batchsize=128, mu=0.9)
     toc = time.time()
     print toc-tic, 'sec elapsed'
-    print 'overall loss: ', net.loss_with_noise(X_train, X_train, reg=0.01)[0]
+    print 'overall loss: ', net.loss_with_noise(X_train, X_train, reg=0.01, opt='test')
     
     plot_net_output(net, stats, X_train)
        
@@ -119,13 +119,13 @@ def __contractive_autoencoder_mnist__():
     nhidden = 100 
 
     net = contractive_autoencoder(layer_units=(ninput, nhidden, ninput), bias=True, act_func = 'sigmoid', 
-                                  loss_type='cross_entropy', seed=12)
+                                  loss_type='euclidean', seed=12)
     tic = time.time()
     stats = net.train_with_SGD(X_train, learning_rate=0.1, learning_rate_decay=0.95, reg=0.01, 
-                               num_iters=2500, batchsize=128, mu=0.9)
+                               num_iters=2000, batchsize=128, mu=0.9)
     toc = time.time()
     print toc-tic, 'sec elapsed'
-    print 'overall loss: ', net.loss(X_train, reg=0.01)[0]
+    print 'overall loss: ', net.loss(X_train, reg=0.01, opt='test')
     
     plot_net_output(net, stats, X_train)
 
@@ -146,13 +146,13 @@ def __contractive_higher_autoencoder_mnist__():
     nhidden = 100 
 
     net = contractive_higher_autoencoder(layer_units=(ninput, nhidden, ninput), bias=True, act_func = 'sigmoid', 
-                                         loss_type='cross_entropy', seed=12)
+                                         loss_type='euclidean', seed=12)
     tic = time.time()
     stats = net.train_with_SGD(X_train, learning_rate=0.1, learning_rate_decay=0.95, reg=0.01, 
-                               num_iters=2500, batchsize=128, mu=0.9)
+                               num_iters=2000, batchsize=128, mu=0.9)
     toc = time.time()
     print toc-tic, 'sec elapsed'
-    print 'overall loss: ', net.loss(X_train, reg=0.01)[0]    
+    print 'overall loss: ', net.loss(X_train, reg=0.01, opt='test')    
     
     plot_net_output(net, stats, X_train)
 
@@ -161,7 +161,7 @@ def __contractive_higher_autoencoder_mnist__():
 # TEST DIFFERENT AUTOENCODERS #
 # ########################### # 
 
-#__autoencoder_mnist__()                    ## loss =179.18
-#__denoising_autoencoder_mnist__()          ## loss =178.81
-__contractive_autoencoder_mnist__()         ## loss =~131.58
-#__contractive_higher_autoencoder_mnist__() ## loss =~116.68
+__autoencoder_mnist__()                    ## loss = 6.6937
+#__denoising_autoencoder_mnist__()          ## loss = 6.8654
+#__contractive_autoencoder_mnist__()        ## loss = 6.0982
+#__contractive_higher_autoencoder_mnist__() ## loss = 6.0628

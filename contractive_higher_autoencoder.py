@@ -8,7 +8,7 @@ class contractive_higher_autoencoder(base_autoencoder):
         base_autoencoder.__init__(self, layer_units, weights, bias, act_func, loss_type)
         self.init_weights(seed)
     
-    def loss(self, X, reg=0.001): 
+    def loss(self, X, reg=0.001, opt='train'): 
         weights = self.weights
         bias = self.bias
         
@@ -28,7 +28,13 @@ class contractive_higher_autoencoder(base_autoencoder):
         X_pred  = self.ac_func(pre, self.act_func)
         
         loss = self.loss_func(X, X_pred)
-        act_der = np.reshape(hid_act*(1.0-hid_act)*(1-2.0*hid_act), (ntrain, 1, nhidden))
+        if opt == 'test':
+            return loss        
+        
+        act_der = np.reshape(self.ac_func_deriv(hid_act, self.act_func)*
+                             self.ac_func_deriv(hid_act, self.act_func)*
+                             (1-2.0*hid_act), (ntrain, 1, nhidden))
+        
         loss_jacobian = act_der*np.reshape(W, (1, ninput, nhidden))
         loss += reg*np.sum( loss_jacobian*loss_jacobian ) /ntrain  
         
@@ -37,13 +43,14 @@ class contractive_higher_autoencoder(base_autoencoder):
         err_W1       = err_pred_act.dot(W)
         
         # This part 
-        err_hid_act = err_W1*self.ac_func_deriv(hid_act, self.act_func) + reg*(hid_act*(1.0-hid_act)*(1.0-6.0*hid_act+6.0*hid_act*hid_act))*np.sum(W*W, axis=0)/ntrain
-        err_W0      = err_hid_act.dot(W.transpose())
-        
+        err_hid_act = err_W1*self.ac_func_deriv(hid_act, self.act_func) + reg*(self.ac_func_deriv(hid_act, self.act_func)*
+                                                                               hid_act*hid_act*(1.0-4.0*hid_act+5.0*hid_act*hid_act-2.0*hid_act*hid_act*hid_act)*
+                                                                               hid_act*(2.0-12.0*hid_act+20*hid_act*hid_act-10*hid_act*hid_act*hid_act))*np.sum(W*W, axis=0)/ntrain
+                                                                               
+        err_W0 = err_hid_act.dot(W.transpose()) # + reg*np.sum(act_der*act_der)*W/ntrain    
+         
         dW  = hid_act.transpose().dot(err_pred_act).transpose()
         dW += X.transpose().dot(err_hid_act) 
-        
-        dW += reg*np.sum(act_der*act_der)*W/ntrain    
     
         if bias == True:
             db1  = np.sum(err_pred_act, axis=0)          

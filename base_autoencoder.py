@@ -97,10 +97,10 @@ class base_autoencoder:
         
         return X_pred
     
-    def loss(self, X, reg=0.001):
+    def loss(self, X, reg=0.001, opt='train'):
         raise NotImplementedError
     
-    def loss_with_noise(self, X, X_noisy, reg=0.001):
+    def loss_with_noise(self, X, X_noisy, reg=0.001, opt='train'):
         raise NotImplementedError
     
     def euclidean_loss(self, X, X_pred):
@@ -120,7 +120,7 @@ class base_autoencoder:
     
     def cross_entropy_loss_deriv(self, X, X_pred):
         ntrain  = X.shape[0]
-        deriv = ( (X_pred-X)/(X_pred*(1-X_pred)) ) / ntrain
+        deriv = ( (X_pred-X)/(X_pred*(1-X_pred) + 1e-7) ) / ntrain
         return deriv
     
     def loss_func(self, X, X_pred):
@@ -161,26 +161,23 @@ class base_autoencoder:
             loss_history.append(loss)
 
             W  = self.weights['W']
-            wgrad = learning_rate*grads['W'] + mu*velocity['W']
-            W -= wgrad
-            velocity['W'] = wgrad
+            velocity['W'] = learning_rate*grads['W'] + mu*velocity['W']
+            W -= velocity['W']
 
             if self.bias == True:
                 b0 = self.weights['b0']
                 b1 = self.weights['b1']
                 
-                b1grad = learning_rate*grads['b1'] + mu*velocity['b1'] 
-                b1 -= b1grad 
-                velocity['b1'] = b1grad
+                velocity['b1'] = learning_rate*grads['b1'] + mu*velocity['b1'] 
+                b1 -= velocity['b1'] 
             
-                b0grad = learning_rate*grads['b0'] + mu*velocity['b0'] 
-                b0 -= b0grad
-                velocity['b0'] = b0grad
+                velocity['b0'] = learning_rate*grads['b0'] + mu*velocity['b0'] 
+                b0 -= velocity['b0']
                 
             if it % 50 == 0:
                 print 'SGD: iteration %d / %d: loss %f' % (it, num_iters, loss)
                     
-            if it % 200 == 0:
+            if it % 500 == 0:
                 learning_rate *= learning_rate_decay
                 
         return loss_history
@@ -229,7 +226,7 @@ class base_autoencoder:
             if it % 50 == 0:
                 print 'SGD: iteration %d / %d: loss %f' % (it, num_iters, loss)
                 
-            if it % 200 == 0:
+            if it % 500 == 0:
                 learning_rate *= learning_rate_decay
                 
         return loss_history
