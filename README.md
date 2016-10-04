@@ -12,6 +12,7 @@ This code repository contains "AutoEncoder(AE), Denoising AutoEncoder(DAE), Cont
 In case of any failure/recommendation, please don't hesitate to connect with the author (Savas Ozkan / savasozkan.com).
 
 The example results with 2000 iterations 0.1 learning step parameter configurations.
+
 AutoEncoder (euclidean loss=6.6937)
 ![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/ae.png)
 ![alt tag](https://github.com/savasozkan/py_autoencoders/blob/master/results/ae_re.png)
